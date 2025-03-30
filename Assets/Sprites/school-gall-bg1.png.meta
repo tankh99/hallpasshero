@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      school-gall-bg1_0: -8627399476795085967
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
