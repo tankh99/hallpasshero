@@ -36,6 +36,13 @@ public class MainGame : MonoBehaviour
     private float gameTime = 480f; // 8:00 AM in minutes
     
     private UIManager uiManager;
+
+
+    private void Awake() {
+        uiManager = FindObjectOfType<UIManager>();
+        
+    }
+
     public void StartGame()
     {
         SceneManager.LoadScene("MainGame");
