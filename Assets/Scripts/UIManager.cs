@@ -75,6 +75,11 @@ public class UIManager : MonoBehaviour
     private string currentFullText;  // Store the full text
     private StudentProfile currentSpeaker;  // Add this field
 
+    [Header("Feedback Sounds")]
+    public AudioSource feedbackSound;
+    public AudioClip successSound;
+    public AudioClip failureSound;
+
     private void Awake()
     {
         gameManager = FindFirstObjectByType<MainGame>();
@@ -294,6 +299,13 @@ public class UIManager : MonoBehaviour
         {
             feedbackPanel.SetActive(true);
             
+            if (feedbackSound != null) {
+                AudioClip clipToPlay = wasCorrect ? successSound : failureSound;
+                if (clipToPlay != null) {
+                    feedbackSound.clip = clipToPlay;
+                    feedbackSound.Play();
+                }
+            }
             string resultText = wasCorrect ? "Correct Decision!" : "Incorrect Decision!";
             string fullText = $"{resultText}\n\nTruth: {truth}";
             
