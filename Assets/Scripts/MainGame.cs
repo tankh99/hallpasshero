@@ -21,12 +21,22 @@ public class MainGame : MonoBehaviour
     private int remainingStudents;
     
     private bool isPassVisible = false;
+    private bool isTeacherListVisible = false;
     private bool isDayComplete = false;
     private float gameTime = 480f; // 8:00 AM in minutes
     
     private UIManager uiManager;
     private StudentManager studentManager;
     private StudentProfile currentStudent;
+
+    private string[] teachers = {
+        "Ms. Smith",
+        "Mr. Johnson",
+        "Mrs. Williams",
+        "Mr. Brown",
+        "Mrs. Jones"
+    };
+
     private void Awake() {
         uiManager = FindFirstObjectByType<UIManager>();
         studentManager = FindFirstObjectByType<StudentManager>();
@@ -119,6 +129,18 @@ public class MainGame : MonoBehaviour
 
     }
 
+    public void ToggleTeacherList()
+    {
+        isTeacherListVisible = !isTeacherListVisible;
+
+        if(uiManager != null) {
+            uiManager.ToggleTeacherListView(isTeacherListVisible);
+            if(isTeacherListVisible) {
+                uiManager.UpdateTeacherListUI(teachers);
+            }
+        }
+    }
+
     public void ApproveStudent()
     {
         bool correctDecision = !currentStudent.isLying;
@@ -138,12 +160,12 @@ public class MainGame : MonoBehaviour
         if (correctDecision)
         {
             correctDecisions++;
-            reputation += 5;
+            reputation += 5*dayNumber;
         }
         else
         {
             incorrectDecisions++;
-            reputation -= 10;
+            reputation -= 10*dayNumber;
             demeritsIssued++;
         }
         
@@ -154,6 +176,8 @@ public class MainGame : MonoBehaviour
         if (uiManager != null)
         {
             uiManager.SetDecisionButtonsInteractable(false);
+            uiManager.SetHallPassViewActive(false);
+            uiManager.SetTeacherListViewActive(false);
             // Show feedback and wait for user confirmation
             uiManager.ShowDecisionFeedback(correctDecision, currentStudent.truth, reputation, () => {
                 StartCoroutine(WaitAndContinue());
@@ -180,7 +204,7 @@ public class MainGame : MonoBehaviour
         // Hide game UI
         if (uiManager != null)
         {
-            uiManager.ToggleViews(false);  // Hide both views
+            uiManager.HideAllViews();
             uiManager.ShowDayEndPanel(dayNumber, studentsChecked, correctDecisions, reputation);
         }
         

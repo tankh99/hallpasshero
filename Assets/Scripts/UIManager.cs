@@ -28,6 +28,7 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI reasonText;
     public Image studentPortrait;
     public Button inspectPassButton;
+    public Button teacherListButton;
     
     [Header("Hall Pass View")]
     public GameObject hallPassView;
@@ -38,6 +39,13 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI passVisitingText;
     public TextMeshProUGUI passTeacherNameText;
     public Button closeButton;
+
+    [Header("Teacher List View")]
+    public GameObject teacherListView;
+    public TextMeshProUGUI teacherLeftText;
+    public TextMeshProUGUI teacherRightText;
+    public Button teacherListCloseButton;
+
     
     [Header("Decision Buttons")]
     public Button approveButton;
@@ -94,9 +102,15 @@ public class UIManager : MonoBehaviour
         
         if (inspectPassButton != null)
             inspectPassButton.onClick.AddListener(InspectPass);
+
+        if (teacherListButton != null)
+            teacherListButton.onClick.AddListener(ShowTeacherList);
         
         if (closeButton != null)
             closeButton.onClick.AddListener(ReturnToStudent);
+
+        if (teacherListCloseButton != null)
+            teacherListCloseButton.onClick.AddListener(ShowTeacherList);
         
         if (approveButton != null)
             approveButton.onClick.AddListener(ApproveStudent);
@@ -148,6 +162,12 @@ public class UIManager : MonoBehaviour
     {
         if (gameManager != null)
             gameManager.ToggleHallPass();
+    }
+
+    public void ShowTeacherList()
+    {
+        if (gameManager != null)
+            gameManager.ToggleTeacherList();
     }
     
     public void ReturnToStudent()
@@ -280,11 +300,29 @@ public class UIManager : MonoBehaviour
             hallPassView.SetActive(active);
     }
 
+    public void SetTeacherListViewActive(bool active)
+    {
+        if (teacherListView != null)
+            teacherListView.SetActive(active);
+    }
+
     // Combined method for toggling between views
     public void ToggleViews(bool showStudent)
     {
         SetStudentViewActive(showStudent);
         SetHallPassViewActive(!showStudent);
+    }
+
+    public void ToggleTeacherListView(bool show)
+    {
+        SetTeacherListViewActive(show);
+        SetStudentViewActive(!show);
+    }
+
+    public void HideAllViews()
+    {
+        SetStudentViewActive(false);
+        SetHallPassViewActive(false);
     }
 
     public void UpdateHallPassUI(HallPassData currentPass)
@@ -296,6 +334,26 @@ public class UIManager : MonoBehaviour
         if (passVisitingText != null) passVisitingText.text = currentPass.visiting;
         if (passTeacherNameText != null) passTeacherNameText.text = currentPass.teacherName;
     }
+    public void UpdateTeacherListUI(string[] teachers)
+    {
+        List<string> leftColumn = new List<string>();
+        List<string> rightColumn = new List<string>();
+
+        for (int i = 0; i < teachers.Length; i++)
+        {
+            if (i % 2 == 0)
+                leftColumn.Add(teachers[i]);
+            else
+                rightColumn.Add(teachers[i]);
+        }
+
+        if (teacherLeftText != null)
+            teacherLeftText.text = string.Join("\n", leftColumn);
+
+        if (teacherRightText != null)
+            teacherRightText.text = string.Join("\n", rightColumn);
+    }
+
 
     public void ShowDecisionFeedback(bool wasCorrect, string truth, int reputation, System.Action onContinue)
     {
