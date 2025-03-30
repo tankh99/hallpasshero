@@ -1,0 +1,10 @@
+using UnityEngine;
+[System.Serializable]
+public class StudentProfile
+{
+    public string name;
+    public string reason;
+    public HallPassData hallPass;
+    public Sprite displayImage;
+
+}
