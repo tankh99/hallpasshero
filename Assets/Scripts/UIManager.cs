@@ -79,6 +79,7 @@ public class UIManager : MonoBehaviour
     public AudioSource feedbackSound;
     public AudioClip successSound;
     public AudioClip failureSound;
+    public AudioSource dayEndSound;
 
     private void Awake()
     {
@@ -171,6 +172,9 @@ public class UIManager : MonoBehaviour
     {
         // mainMenuPanel.SetActive(false);
         // gamePanel.SetActive(false);
+        if (dayEndSound != null) {
+            dayEndSound.Play();
+        }
         dayEndPanel.SetActive(true);
         
         dayEndTitleText.text = "Day " + day + " Complete!";
