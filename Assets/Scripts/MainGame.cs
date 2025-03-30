@@ -238,6 +238,9 @@ public class MainGame : MonoBehaviour
         
         // Increment day number
         dayNumber++;
+        if(dayNumber > 3) {
+            uiManager.Victory();
+        }
     }
 
 

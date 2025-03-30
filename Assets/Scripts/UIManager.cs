@@ -164,6 +164,10 @@ public class UIManager : MonoBehaviour
     public void GameOver() {
         SceneManager.LoadScene("GameOverScene");
     }
+
+    public void Victory() {
+        SceneManager.LoadScene("VictoryScene");
+    }
     
     public void QuitGame()
     {
