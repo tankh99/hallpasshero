@@ -4,7 +4,7 @@ public class BackgroundZoom : MonoBehaviour
 {
     public RectTransform background;
     public float zoomTime = 20f;
-    public float zoomScale = 1.5f;
+    public float zoomScale = 1.2f;
 
     private float elapsedTime = 0f;
     private bool zoomingIn = true;

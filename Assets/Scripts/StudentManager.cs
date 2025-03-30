@@ -76,7 +76,7 @@ public class StudentManager : MonoBehaviour
                     date = "2025-03-30",
                     studentName = "Loro"
                 },
-                isValid = false,
+                isValid = true,
                 isGirl = true,
                 truth = "Jenny eventually bought her phone back from Loro for a ransom of $25",
                 displayImage = Resources.Load<Sprite>("Sprites/boy2"),

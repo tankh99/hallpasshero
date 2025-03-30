@@ -1,6 +1,6 @@
 using UnityEngine;
 [System.Serializable]
-public class HallPassData : MonoBehaviour {
+public class HallPassData {
     public string signedBy;
     public string leaveAt; 
     public string returnAt;
