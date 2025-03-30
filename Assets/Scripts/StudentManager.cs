@@ -85,7 +85,7 @@ public class StudentManager : MonoBehaviour
                 },
                 isValid = true,
                 isGirl = true,
-                truth = "Jenny eventually bought her phone back from Loro for a ransom of $25",
+                truth = "Loro ate her lunch and found Jenny's phone. She gave it back to Jenny for a random of $25",
                 displayImage = Resources.Load<Sprite>("Sprites/girl2"),
                 date = "2025-03-30",
                 time = "9:40 AM",
@@ -93,12 +93,12 @@ public class StudentManager : MonoBehaviour
                 maxPitch = 1.85f,
                 volume = 0.5f 
             },
-            // Wrong signedBy, wrong hall pass date, wrong mentioned teacher
+            // Wrong signedBy, wrong hall pass date
             new StudentProfile {
                 name = "Tyler",
                 reason = "I got permission from Mr. Simmons to go to the library to research on quantum physics for my project.",
                 hallPass = new HallPassData {
-                    signedBy = "Ms. Thatcher",
+                    signedBy = "Mr. Simmons",
                     leaveAt = "11:00 AM",
                     returnAt = "11:45 AM",
                     visiting = "Library",
@@ -131,7 +131,7 @@ public class StudentManager : MonoBehaviour
                 isValid = false,
                 isGirl = true,
                 displayImage = Resources.Load<Sprite>("Sprites/girl1"),
-                truth = "Olivia enlisted Oliver to help get a hall pass to the science department, claiming she was delivering a report to Mr. Murdock. In reality, she’d spilled coffee on the report and needed Oliver to distract Murdock long enough to swap it out with a clean copy. It wasn’t an urgent delivery — just a clever cover-up",
+                truth = "Olivia and Oliver are twins. She's using his hall pass because he got stuck inside a vending machine trying to get free snacks. The 'urgent report' is just a distraction while she tries to figure out how to get him unstuck before the next class. Mr. Murdock teaches physics - she's hoping he knows something about leverage.",
                 date = "2025-03-31",
                 time = "1:35 PM",
                 minPitch = 1.6f,   // Medium-high female pitch
