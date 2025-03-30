@@ -12,6 +12,7 @@ public class StudentManager : MonoBehaviour
     private StudentProfile[] students;
     private UIManager uiManager;
 
+    private int currentStudentIndex = 0;
 
     void Awake()
     {
@@ -58,6 +59,7 @@ public class StudentManager : MonoBehaviour
                     studentName = "Jenny"
                 },
                 isValid = true,
+                isGirl = true,
                 truth = "Jenny was speaking the truth, unfortunately, her hall pass didn't mention that she was going to the restroom.",
                 displayImage = Resources.Load<Sprite>("Sprites/girl2"),
                 date = "2025-03-30",
@@ -92,6 +94,7 @@ public class StudentManager : MonoBehaviour
                     studentName = "Oliver",
                 },
                 isValid = true,
+                isGirl = true,
                 displayImage = Resources.Load<Sprite>("Sprites/girl1"),
                 truth = "Olivia enlisted Oliver to help get a hall pass to the science department, claiming she was delivering a report to Mr. Murdock. In reality, she’d spilled coffee on the report and needed Oliver to distract Murdock long enough to swap it out with a clean copy. It wasn’t an urgent delivery — just a clever cover-up",
                 date = "2025-03-30",
@@ -126,6 +129,7 @@ public class StudentManager : MonoBehaviour
                     studentName = "Sophia"
                 },
                 isValid = false,
+                isGirl = true,
                 truth = "Sophia isn’t buying a textbook. She’s really going to the *allegedly* 'secret' underground club beneath the bookstore that promises students free pizza in exchange for 'intellectual debates.' Sophia believes she’s 'one step away' from winning a lifetime supply of pizza.",
                 displayImage = Resources.Load<Sprite>("Sprites/girl1"),
                 date = "2025-03-30",
@@ -160,6 +164,7 @@ public class StudentManager : MonoBehaviour
                     studentName = "Nina"
                 },
                 isValid = true,
+                isGirl = true,
                 truth = "Nina doesn’t need to talk to Mr. Martinez. She is simply trying to find her gym bag, which she claims to have accidentally swapped with a random student’s bag last week and now needs to find it before the *'gym soap incident'** is discovered.",
                 displayImage = Resources.Load<Sprite>("Sprites/girl1"),
                 date = "2025-03-30",
@@ -196,11 +201,24 @@ public class StudentManager : MonoBehaviour
         StudentProfile randomStudent = students[randomIndex];
         
         if (uiManager != null) {
-            uiManager.UpdateStudentUI(randomStudent.name, randomStudent.reason, 
-                randomStudent.displayImage, randomStudent);
+            uiManager.UpdateStudentUI(randomStudent);
             uiManager.UpdateOverlayUI(randomStudent.date + " " + randomStudent.time);
         }
         return randomStudent;
+    }
+
+    public StudentProfile ShowNextStudent() {
+        if (currentStudentIndex >= students.Length) {
+            Debug.LogError("No more students to show");
+            return null;
+        }
+        StudentProfile nextStudent = students[currentStudentIndex++];
+
+        if (uiManager != null) {
+            uiManager.UpdateStudentUI(nextStudent);
+            uiManager.UpdateOverlayUI(nextStudent.date + " " + nextStudent.time);
+        }
+        return nextStudent;
     }
 
 }

@@ -68,7 +68,7 @@ public class MainGame : MonoBehaviour
         isPassVisible = false;
 
         // Generate random student and pass data
-        currentStudent = studentManager.ShowRandomStudent();
+        currentStudent = studentManager.ShowNextStudent();
         remainingStudents--;
         
         // Update UI through UIManager

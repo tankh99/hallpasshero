@@ -280,11 +280,11 @@ public class UIManager : MonoBehaviour
     }
 
     // Method to update student UI with streaming text
-    public void UpdateStudentUI(string studentName, string reason, Sprite displayImage, StudentProfile student)
+    public void UpdateStudentUI(StudentProfile student)
     {
         currentSpeaker = student;  // Store the current speaker
         if (studentNameText != null)
-            studentNameText.text = studentName;
+            studentNameText.text = student.name;
         
         // Stop any existing text streaming
         if (textStreamCoroutine != null)
@@ -292,10 +292,10 @@ public class UIManager : MonoBehaviour
         
         // Start new text streaming for reason
         if (reasonText != null)
-            textStreamCoroutine = StartCoroutine(StreamText(reason, reasonText));
+            textStreamCoroutine = StartCoroutine(StreamText(student.reason, reasonText));
         
         if (studentPortrait != null)
-            studentPortrait.sprite = displayImage;
+            studentPortrait.sprite = student.displayImage;
     }
     private StudentProfile[] students;
     public void SetDecisionButtonsInteractable(bool interactable)
