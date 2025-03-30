@@ -22,6 +22,7 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI dateTimeText;
     public TextMeshProUGUI reputationText;
     public TextMeshProUGUI studentsRemainingText;
+    public AudioSource soundEffectSource;
     
     [Header("Student View")]
     public GameObject studentView;
@@ -94,6 +95,7 @@ public class UIManager : MonoBehaviour
     public AudioClip successSound;
     public AudioClip failureSound;
     public AudioSource dayEndSound;
+    
     
     private void Awake()
     {
@@ -180,26 +182,37 @@ public class UIManager : MonoBehaviour
     
     public void InspectPass()
     {
-        if (gameManager != null)
+        if (gameManager != null) 
+        {
+            soundEffectSource.Play();
             gameManager.ToggleHallPass();
+        }
     }
 
     public void ShowTeacherList()
     {
         if (gameManager != null)
+        {
+            soundEffectSource.Play();
             gameManager.ToggleTeacherList();
+        }
     }
 
     public void ShowLocationList()
     {
         if (gameManager != null)
+        {
+            soundEffectSource.Play();
             gameManager.ToggleLocationList();
+        }
     }
     
     public void ReturnToStudent()
     {
-        if (gameManager != null)
+        if (gameManager != null) {
+            soundEffectSource.Play();
             gameManager.ToggleHallPass();
+        }
     }
     
     public void ApproveStudent()
