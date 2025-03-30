@@ -35,8 +35,8 @@ public class StudentManager : MonoBehaviour
                 reason = "I need to deliver a sealed package to the chemistry lab.",
                 hallPass = new HallPassData {
                     signedBy = "Mr. Owens",
-                    leaveAt = "10:45 AM",
-                    returnAt = "11:15 AM",
+                    leaveAt = "8:45 AM",
+                    returnAt = "9:15 AM",
                     visiting = "Chemistry Lab",
                     date = "2025-03-30",
                     studentName = "Elliot"
@@ -45,11 +45,11 @@ public class StudentManager : MonoBehaviour
                 truth = "Elliot is indeed delivering something to the chemistry lab, but he has no idea the package contains a live frog that has been injected with caffeine.",
                 displayImage = Resources.Load<Sprite>("Sprites/boy2"),
                 date = "2025-03-30",
-                time = "10:50 AM"
+                time = "8:50 AM"
             },
             new StudentProfile {
                 name = "Jenny",
-                reason = "I left something at the cafeteria, I'd like to take it.",
+                reason = "I left my phone at the cafeteria, I'd like to take it.",
                 hallPass = new HallPassData {
                     signedBy = "Ms. Lee",
                     leaveAt = "9:05 AM",
@@ -58,12 +58,30 @@ public class StudentManager : MonoBehaviour
                     date = "2025-03-30",
                     studentName = "Jenny"
                 },
-                isValid = true,
+                isValid = false,
                 isGirl = true,
-                truth = "Jenny was speaking the truth, unfortunately, her hall pass didn't mention that she was going to the restroom.",
+                truth = "Unfortunately, Jenny's hall pass didn't mention that she was going to the restroom.",
                 displayImage = Resources.Load<Sprite>("Sprites/girl2"),
                 date = "2025-03-30",
                 time = "9:08 AM"
+            },
+            new StudentProfile {
+                name = "Loro",
+                reason = "I need to get an early lunch from the cafeteria.",
+                hallPass = new HallPassData {
+                    signedBy = "Ms. Lee",
+                    leaveAt = "9:35 AM",
+                    returnAt = "10:35 AM",
+                    visiting = "Cafeteria",
+                    date = "2025-03-30",
+                    studentName = "Loro"
+                },
+                isValid = false,
+                isGirl = true,
+                truth = "Jenny eventually bought her phone back from Loro for a ransom of $25",
+                displayImage = Resources.Load<Sprite>("Sprites/boy2"),
+                date = "2025-03-30",
+                time = "9:40 AM"
             },
             new StudentProfile {
                 name = "Tyler",
@@ -76,115 +94,119 @@ public class StudentManager : MonoBehaviour
                     date = "2025-02-30",
                     studentName = "Tyler"
                 },
-                isValid = true,
+                isValid = false,
                 truth = "Tyler isn’t researching quantum physics. He just wants to skip class",
                 displayImage = Resources.Load<Sprite>("Sprites/boy1"),
                 date = "2025-03-30",
                 time = "11:05 AM"
             },
+            // New day
             new StudentProfile {
                 name = "Olivia",
                 reason = "I need to deliver a report to Mr. Murdock in the science department.",
                 hallPass = new HallPassData {
                     signedBy = "Ms. Thatcher",
-                    leaveAt = "1:30 PM",
+                    leaveAt = "11:30 AM",
                     returnAt = "2:00 PM",
                     visiting = "Science Department",
-                    date = "2025-03-30",
+                    date = "2025-03-31",
                     studentName = "Oliver",
                 },
-                isValid = true,
+                isValid = false,
                 isGirl = true,
                 displayImage = Resources.Load<Sprite>("Sprites/girl1"),
                 truth = "Olivia enlisted Oliver to help get a hall pass to the science department, claiming she was delivering a report to Mr. Murdock. In reality, she’d spilled coffee on the report and needed Oliver to distract Murdock long enough to swap it out with a clean copy. It wasn’t an urgent delivery — just a clever cover-up",
-                date = "2025-03-30",
+                date = "2025-03-31",
                 time = "1:35 PM"
             },
             new StudentProfile {
                 name = "Liam",
-                reason = "I'm going to the nurse for a quick check-up.",
+                reason = "AHHHH, I'M LITERALLY DYING AND YOU'RE STOPPING ME FROM GOING TO THE NURSE??!?!.",
                 hallPass = new HallPassData {
                     signedBy = "Dr. Simmons",
                     leaveAt = "12:30 PM",
                     returnAt = "1:00 PM",
                     visiting = "Nurse",
-                    date = "2025-03-30",
+                    date = "2025-03-31",
                     studentName = "Liam"
                 },
                 isValid = true,
-                truth = "Liam's trip to the nurse is entirely unnecessary. He just wants to take a nap in the comfy nurse's office, having been told once by Dr. Simmons that the chairs 'are as close to clouds as possible.'",
+                truth = "Liam's bleeding from his thumb, probably from playing too much with the stapler.",
                 displayImage = Resources.Load<Sprite>("Sprites/boy1"),
-                date = "2025-03-30",
+                date = "2025-03-31",
                 time = "12:35 PM"
             },
             new StudentProfile {
                 name = "Sophia",
-                reason = "I need to pick up a new textbook from the bookstore.",
+                reason = "Here, take this...*slides a bag of weed to you*. I need to get to the bookstore for an errand. Pronto.",
                 hallPass = new HallPassData {
                     signedBy = "Ms. Harper",
                     leaveAt = "2:10 PM",
                     returnAt = "2:30 PM",
                     visiting = "Bookstore",
-                    date = "2025-03-30",
+                    date = "2025-03-31",
                     studentName = "Sophia"
                 },
-                isValid = false,
+                isValid = true,
                 isGirl = true,
-                truth = "Sophia isn’t buying a textbook. She’s really going to the *allegedly* 'secret' underground club beneath the bookstore that promises students free pizza in exchange for 'intellectual debates.' Sophia believes she’s 'one step away' from winning a lifetime supply of pizza.",
+                truth = "Sophia's turning over a new leaf. She's been saving up to buy 'Beyond Addiction: A Guide to Recovery'. If only she stopped giving away bags of weed like a charity.",
                 displayImage = Resources.Load<Sprite>("Sprites/girl1"),
-                date = "2025-03-30",
+                date = "2025-03-31",
                 time = "2:12 PM"
             },
-            new StudentProfile {
-                name = "Max",
-                reason = "I need to fetch some papers from the principal's office.",
-                hallPass = new HallPassData {
-                    signedBy = "Mr. Carson",
-                    leaveAt = "10:15 AM",
-                    returnAt = "10:45 AM",
-                    visiting = "Principal's Office",
-                    date = "2025-03-30",
-                    studentName = "Max"
-                },
-                isValid = true,
-                truth = "Max isn’t fetching papers from the principal's office. He’s going there to demand a meeting with the principal about the recent 'injustice' of not getting an extra-long lunch break. The meeting is more about his 'inexplicable thirst for 10 minutes more of freedom' than any real paperwork.",
-                displayImage = Resources.Load<Sprite>("Sprites/boy1"),
-                date = "2025-03-30",
-                time = "10:18 AM"
-            },
+            // Day 3
+
+            // NOTE: Nina is supposed to be lying because her teacher's signedBy is not present
             new StudentProfile {
                 name = "Nina",
-                reason = "I need to speak with Mr. Martinez in the gym about a special event.",
+                reason = "You literally do not understand, this is a matter of life and death. So STOP BLOCKING MY WAY TO THE GYM. OH MY GOD.",
                 hallPass = new HallPassData {
-                    signedBy = "Ms. Cruz",
+                    signedBy = "Mr. Cruz",
                     leaveAt = "12:20 PM",
                     returnAt = "12:40 PM",
                     visiting = "Gym",
-                    date = "2025-03-30",
+                    date = "2025-04-01",
                     studentName = "Nina"
                 },
-                isValid = true,
+                isValid = false,
                 isGirl = true,
-                truth = "Nina doesn’t need to talk to Mr. Martinez. She is simply trying to find her gym bag, which she claims to have accidentally swapped with a random student’s bag last week and now needs to find it before the *'gym soap incident'** is discovered.",
-                displayImage = Resources.Load<Sprite>("Sprites/girl1"),
+                truth = "Nina accidentally left her used tampons on the gym sink. Unfortunately for her, Mr. Cruz is vacationing in Cancun right now",
+                displayImage = Resources.Load<Sprite>("Sprites/girl2"),
                 date = "2025-03-30",
                 time = "12:23 PM"
             },
             new StudentProfile {
+                name = "Max",
+                reason = "I need to speak to the the principal...",
+                hallPass = new HallPassData {
+                    signedBy = "Mr. Carson",
+                    leaveAt = "1:15 PM",
+                    returnAt = "1:45 PM",
+                    visiting = "Principal's Office",
+                    date = "2025-04-01",
+                    studentName = "Max"
+                },
+                isValid = true,
+                truth = "You notice he's packing heat in his back pocket. Thankfully, seems like negotiations went well as he both he and the principal came out of the office laughing.",
+                displayImage = Resources.Load<Sprite>("Sprites/boy1"),
+                date = "2025-04-01",
+                time = "1:18 PM"
+            },
+            new StudentProfile {
                 name = "Ryan",
-                reason = "I need to drop off some papers at the IT office.",
+                reason = "I was asked by Mr. Green to setup some stuff at the server room.",
                 hallPass = new HallPassData {
                     signedBy = "Mr. Green",
                     leaveAt = "3:00 PM",
                     returnAt = "3:30 PM",
-                    visiting = "IT Office",
+                    visiting = "Server Room",
                     date = "2025-03-30",
                     studentName = "Ryan"
                 },
-                isValid = true,
-                truth = "Ryan isn’t dropping off papers. He’s running an underground 'computer sabotage' operation involving 'borrowing' computer cables from the IT office to build an impromptu robot. He’s only halfway through designing a 'self-moving stapler,' but his ambition is unmatched.",
+                isValid = false,
+                truth = "Ryan is actually a spy for the CIA. He's been spying on the school for the past month and he's finally ready to strike.",
                 displayImage = Resources.Load<Sprite>("Sprites/boy1"),
-                date = "2025-03-30",
+                date = "2025-04-01",
                 time = "3:05 PM"
             }
         };
