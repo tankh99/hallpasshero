@@ -6,10 +6,10 @@ using TMPro;
 
 public class UIManager : MonoBehaviour
 {
-    // [Header("Panels")]
+    [Header("Panels")]
     // public GameObject mainMenuPanel;
     // public GameObject gamePanel;
-    // public GameObject dayEndPanel;
+    public GameObject dayEndPanel;
     
     // [Header("Main Menu")]
     // public Button startGameButton;
@@ -31,13 +31,13 @@ public class UIManager : MonoBehaviour
     
     [Header("Hall Pass View")]
     public GameObject hallPassView;
-    public TextMeshProUGUI passNameText;
+    public TextMeshProUGUI passStudentNameText;
     public TextMeshProUGUI passDateText;
-    public TextMeshProUGUI passTimeText;
-    public TextMeshProUGUI passDestinationText;
-    public TextMeshProUGUI passTeacherText;
-    public Image passStamp;
-    public Button returnToStudentButton;
+    public TextMeshProUGUI passLeaveAtText;
+    public TextMeshProUGUI passReturnAtText;
+    public TextMeshProUGUI passVisitingText;
+    public TextMeshProUGUI passTeacherNameText;
+    public Button closeButton;
     
     [Header("Decision Buttons")]
     public Button approveButton;
@@ -74,8 +74,8 @@ public class UIManager : MonoBehaviour
         if (inspectPassButton != null)
             inspectPassButton.onClick.AddListener(InspectPass);
         
-        if (returnToStudentButton != null)
-            returnToStudentButton.onClick.AddListener(ReturnToStudent);
+        if (closeButton != null)
+            closeButton.onClick.AddListener(ReturnToStudent);
         
         if (approveButton != null)
             approveButton.onClick.AddListener(ApproveStudent);
@@ -100,14 +100,14 @@ public class UIManager : MonoBehaviour
     {
         // mainMenuPanel.SetActive(true);
         // gamePanel.SetActive(false);
-        // dayEndPanel.SetActive(false);
+        dayEndPanel.SetActive(false);
     }
     
     public void StartGame()
     {
         // mainMenuPanel.SetActive(false);
         // gamePanel.SetActive(true);
-        // dayEndPanel.SetActive(false);
+        dayEndPanel.SetActive(false);
         
         // Initialize the game manager
         if (gameManager != null)
@@ -147,22 +147,21 @@ public class UIManager : MonoBehaviour
             gameManager.DenyStudent();
     }
     
-    public void ShowDayEndPanel(int day, int studentsChecked, int correctDecisions, int incorrectDecisions, int reputation)
+    public void ShowDayEndPanel(int day, int studentsChecked, int correctDecisions, int reputation)
     {
         // mainMenuPanel.SetActive(false);
         // gamePanel.SetActive(false);
-        // dayEndPanel.SetActive(true);
+        dayEndPanel.SetActive(true);
         
         dayEndTitleText.text = "Day " + day + " Complete!";
         studentsCheckedText.text = "Students Checked: " + studentsChecked;
-        correctDecisionsText.text = "Correct Decisions: " + correctDecisions;
-        incorrectDecisionsText.text = "Incorrect Decisions: " + incorrectDecisions;
+        correctDecisionsText.text = "Correct Decisions: " + correctDecisions + "/" + studentsChecked;
         finalReputationText.text = "Reputation: " + reputation;
     }
     
     public void NextDay()
     {
-        // dayEndPanel.SetActive(false);
+        dayEndPanel.SetActive(false);
         // gamePanel.SetActive(true);
         
         // Start the next day
@@ -218,11 +217,12 @@ public class UIManager : MonoBehaviour
 
     public void UpdateHallPassUI(HallPassData currentPass)
     {
-        if (passNameText != null) passNameText.text = currentPass.studentName;
-        if (passDateText != null) passDateText.text = "Date: " + currentPass.date;
-        if (passTimeText != null) passTimeText.text = "Leave At: " + currentPass.leaveAt + " Return At: " + currentPass.returnAt;
-        if (passDestinationText != null) passDestinationText.text = "Visiting: " + currentPass.visiting;
-        if (passTeacherText != null) passTeacherText.text = "Teacher: " + currentPass.teacherName;
+        if (passStudentNameText != null) passStudentNameText.text = currentPass.studentName;
+        if (passDateText != null) passDateText.text = currentPass.date;
+        if (passLeaveAtText != null) passLeaveAtText.text = currentPass.leaveAt;
+        if (passReturnAtText != null) passReturnAtText.text = currentPass.returnAt;
+        if (passVisitingText != null) passVisitingText.text = currentPass.visiting;
+        if (passTeacherNameText != null) passTeacherNameText.text = currentPass.teacherName;
     }
 
     public void ShowDecisionFeedback(bool wasCorrect, string truth, int reputation, System.Action onContinue)

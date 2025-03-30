@@ -181,7 +181,7 @@ public class MainGame : MonoBehaviour
         if (uiManager != null)
         {
             uiManager.ToggleViews(false);  // Hide both views
-            uiManager.ShowDayEndPanel(dayNumber, studentsChecked, correctDecisions, incorrectDecisions, reputation);
+            uiManager.ShowDayEndPanel(dayNumber, studentsChecked, correctDecisions, reputation);
         }
         
         // Increment day number
