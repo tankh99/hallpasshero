@@ -1103,7 +1103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dayEndPanel: {fileID: 1199486134}
   dayText: {fileID: 1931621129}
-  timeText: {fileID: 725194013}
+  dateTimeText: {fileID: 725194013}
   reputationText: {fileID: 1440152705}
   studentsRemainingText: {fileID: 292057475}
   studentView: {fileID: 1695000715}
@@ -3374,7 +3374,7 @@ GameObject:
   - component: {fileID: 725194012}
   - component: {fileID: 725194013}
   m_Layer: 5
-  m_Name: TimeText
+  m_Name: DateTimeText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3396,8 +3396,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -613, y: 501.99878}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: -416, y: 501.99878}
+  m_SizeDelta: {x: 515.076, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &725194012
 CanvasRenderer:
@@ -3427,7 +3427,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Time Text
+  m_text: 'DateTime Text
 
 '
   m_isRightToLeft: 0
@@ -6267,8 +6267,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -702.7201, y: 471}
-  m_SizeDelta: {x: 516.5599, y: 138.8775}
+  m_AnchoredPosition: {x: -589.0331, y: 471}
+  m_SizeDelta: {x: 743.934, y: 138.878}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1593616366
 MonoBehaviour:
