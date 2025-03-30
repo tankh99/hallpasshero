@@ -11,4 +11,7 @@ public class StudentProfile
     public bool isGirl;
     public string date;
     public string time;
+    public float minPitch;
+    public float maxPitch;
+    public float volume;
 }

@@ -30,20 +30,50 @@ public class MainGame : MonoBehaviour
     private StudentManager studentManager;
     private StudentProfile currentStudent;
 
-    private string[] teachers = {
-        "Ms. Smith",
-        "Mr. Johnson",
-        "Mrs. Williams",
-        "Mr. Brown",
-        "Mrs. Jones"
+    private string[][] teachers = {
+        new string[] {
+            "Ms. Owens",
+            "Ms. Thatcher",
+            "Ms. Wiles",
+            "Ms. Lee",
+            "Ms. Harper",
+        },
+        new string[] {
+            "Mr. Owens",
+            "Mr. Wiles",
+            "Mr. Lee",
+            "Mr. Harper",
+            "Mr. Simmons"
+        },
+        new string[] {
+            "Ms. Harper",
+            "Mr. Carson",
+            "Ms. Lee",
+            "Ms. Owens",
+            "Mr. Lion"
+        }
     };
-
-    private string[] locations = {
-        "Bathroom",
-        "Nurse's Office",
-        "Main Office",
-        "Library",
-        "Cafeteria"
+    private string[][] locations = {
+        new string[] {
+            "Science Department",
+            "Nurse",
+            "Cafeteria",
+            "Restroom"
+        },
+        new string[] {
+            "Science Department",
+            "Nurse",
+            "Main Office",
+            "Library",
+            "Cafeteria"
+        },
+        new string[] {
+            "Principal's Office",
+            "Chemistry Lab",
+            "Gym",
+            "Art Room",
+            "Music Room"
+        }
     };
 
     private void Awake() {
@@ -145,7 +175,7 @@ public class MainGame : MonoBehaviour
         if(uiManager != null) {
             uiManager.ToggleTeacherListView(isTeacherListVisible);
             if(isTeacherListVisible) {
-                uiManager.UpdateTeacherListUI(teachers);
+                uiManager.UpdateTeacherListUI(teachers, dayNumber);
             }
         }
     }
@@ -157,7 +187,7 @@ public class MainGame : MonoBehaviour
         if(uiManager != null) {
             uiManager.ToggleLocationListView(isLocationListVisible);
             if(isLocationListVisible) {
-                uiManager.UpdateLocationListUI(locations);
+                uiManager.UpdateLocationListUI(locations, dayNumber);
             }
         }
     }

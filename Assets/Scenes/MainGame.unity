@@ -304,7 +304,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4278190080
   m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -390,7 +390,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -96.161, y: 53.481}
+  m_AnchoredPosition: {x: -96.161, y: 132.8}
   m_SizeDelta: {x: 318.921, y: 44.753}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &167849722
@@ -1106,6 +1106,7 @@ MonoBehaviour:
   dateTimeText: {fileID: 725194013}
   reputationText: {fileID: 1440152705}
   studentsRemainingText: {fileID: 292057475}
+  soundEffectSource: {fileID: 1118987031}
   studentView: {fileID: 1695000715}
   studentNameText: {fileID: 334959724}
   reasonText: {fileID: 1315985431}
@@ -2995,7 +2996,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: a9cde026e890e437aae096cabad75cd3, type: 3}
   m_Resource: {fileID: 8300000, guid: a9cde026e890e437aae096cabad75cd3, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.6
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -3636,7 +3637,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 0.8235294, a: 0.6627451}
+  m_Color: {r: 1, g: 1, b: 0.8235294, a: 0.7294118}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3846,7 +3847,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: e653d33e64776475b868685275578ea9, type: 3}
   m_Resource: {fileID: 8300000, guid: e653d33e64776475b868685275578ea9, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -7444,7 +7445,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 9a1e1e160e7b2e84c9be4b78f60270fb, type: 3}
   m_Resource: {fileID: 8300000, guid: 9a1e1e160e7b2e84c9be4b78f60270fb, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 0.25
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -7845,7 +7846,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0

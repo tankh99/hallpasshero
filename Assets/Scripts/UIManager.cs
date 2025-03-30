@@ -282,13 +282,13 @@ public class UIManager : MonoBehaviour
             if (textSound != null && c != ' ')
             {
                 // Set pitch based on speaker
-                if (currentSpeaker != null && currentSpeaker.isGirl)
+                if (currentSpeaker != null)
                 {
-                    textSound.pitch = Random.Range(girlPitchMin, girlPitchMax);
-                }
-                else
-                {
-                    textSound.pitch = Random.Range(boyPitchMin, boyPitchMax);
+                    float pitchMin = currentSpeaker.minPitch;
+                    float pitchMax = currentSpeaker.maxPitch;
+                    float volume = currentSpeaker.volume;
+                    textSound.pitch = Random.Range(pitchMin, pitchMax);
+                    textSound.volume = volume;
                 }
                 textSound.Play();
             }
@@ -395,17 +395,18 @@ public class UIManager : MonoBehaviour
         if (passVisitingText != null) passVisitingText.text = currentPass.visiting;
         if (passTeacherNameText != null) passTeacherNameText.text = currentPass.signedBy;
     }
-    public void UpdateTeacherListUI(string[] teachers)
+    public void UpdateTeacherListUI(string[][] teachers, int day)
     {
+        day = day - 1;
         List<string> leftColumn = new List<string>();
         List<string> rightColumn = new List<string>();
 
-        for (int i = 0; i < teachers.Length; i++)
+        for (int i = 0; i < teachers[day].Length; i++)
         {
             if (i % 2 == 0)
-                leftColumn.Add(teachers[i]);
+                leftColumn.Add(teachers[day][i]);
             else
-                rightColumn.Add(teachers[i]);
+                rightColumn.Add(teachers[day][i]);
         }
 
         if (teacherLeftText != null)
@@ -415,18 +416,19 @@ public class UIManager : MonoBehaviour
             teacherRightText.text = string.Join("\n", rightColumn);
     }
 
-    public void UpdateLocationListUI(string[] locations)
+    public void UpdateLocationListUI(string[][] locations, int day)
     {
 
+        day = day - 1;
         List<string> leftColumn = new List<string>();
         List<string> rightColumn = new List<string>();
 
-        for (int i = 0; i < locations.Length; i++)
+        for (int i = 0; i < locations[day].Length; i++)
         {
             if (i % 2 == 0)
-                leftColumn.Add(locations[i]);
+                leftColumn.Add(locations[day][i]);
             else
-                rightColumn.Add(locations[i]);
+                rightColumn.Add(locations[day][i]);
         }
 
         if (locationListLeftText != null)
