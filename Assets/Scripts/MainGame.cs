@@ -22,6 +22,7 @@ public class MainGame : MonoBehaviour
     
     private bool isPassVisible = false;
     private bool isTeacherListVisible = false;
+    private bool isLocationListVisible = false;
     private bool isDayComplete = false;
     private float gameTime = 480f; // 8:00 AM in minutes
     
@@ -35,6 +36,14 @@ public class MainGame : MonoBehaviour
         "Mrs. Williams",
         "Mr. Brown",
         "Mrs. Jones"
+    };
+
+    private string[] locations = {
+        "Bathroom",
+        "Nurse's Office",
+        "Main Office",
+        "Library",
+        "Cafeteria"
     };
 
     private void Awake() {
@@ -137,6 +146,18 @@ public class MainGame : MonoBehaviour
             uiManager.ToggleTeacherListView(isTeacherListVisible);
             if(isTeacherListVisible) {
                 uiManager.UpdateTeacherListUI(teachers);
+            }
+        }
+    }
+
+    public void ToggleLocationList()
+    {
+        isLocationListVisible = !isLocationListVisible;
+
+        if(uiManager != null) {
+            uiManager.ToggleLocationListView(isLocationListVisible);
+            if(isLocationListVisible) {
+                uiManager.UpdateLocationListUI(locations);
             }
         }
     }

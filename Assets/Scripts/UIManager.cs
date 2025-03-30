@@ -29,7 +29,7 @@ public class UIManager : MonoBehaviour
     public Image studentPortrait;
     public Button inspectPassButton;
     public Button teacherListButton;
-    
+    public Button locationListButton;
     [Header("Hall Pass View")]
     public GameObject hallPassView;
     public TextMeshProUGUI passStudentNameText;
@@ -46,6 +46,11 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI teacherRightText;
     public Button teacherListCloseButton;
 
+    [Header("Location List View")]
+    public GameObject locationListView;
+    public TextMeshProUGUI locationListLeftText;
+    public TextMeshProUGUI locationListRightText;
+    public Button locationListCloseButton;
     
     [Header("Decision Buttons")]
     public Button approveButton;
@@ -105,12 +110,18 @@ public class UIManager : MonoBehaviour
 
         if (teacherListButton != null)
             teacherListButton.onClick.AddListener(ShowTeacherList);
+
+        if (locationListButton != null)
+            locationListButton.onClick.AddListener(ShowLocationList);
         
         if (closeButton != null)
             closeButton.onClick.AddListener(ReturnToStudent);
 
         if (teacherListCloseButton != null)
             teacherListCloseButton.onClick.AddListener(ShowTeacherList);
+
+        if (locationListCloseButton != null)
+            locationListCloseButton.onClick.AddListener(ShowLocationList);
         
         if (approveButton != null)
             approveButton.onClick.AddListener(ApproveStudent);
@@ -168,6 +179,12 @@ public class UIManager : MonoBehaviour
     {
         if (gameManager != null)
             gameManager.ToggleTeacherList();
+    }
+
+    public void ShowLocationList()
+    {
+        if (gameManager != null)
+            gameManager.ToggleLocationList();
     }
     
     public void ReturnToStudent()
@@ -306,6 +323,12 @@ public class UIManager : MonoBehaviour
             teacherListView.SetActive(active);
     }
 
+    public void SetLocationListViewActive(bool active)
+    {
+        if (locationListView != null)
+            locationListView.SetActive(active);
+    }
+
     // Combined method for toggling between views
     public void ToggleViews(bool showStudent)
     {
@@ -316,6 +339,12 @@ public class UIManager : MonoBehaviour
     public void ToggleTeacherListView(bool show)
     {
         SetTeacherListViewActive(show);
+        SetStudentViewActive(!show);
+    }
+
+    public void ToggleLocationListView(bool show)
+    {
+        SetLocationListViewActive(show);
         SetStudentViewActive(!show);
     }
 
@@ -354,6 +383,26 @@ public class UIManager : MonoBehaviour
             teacherRightText.text = string.Join("\n", rightColumn);
     }
 
+    public void UpdateLocationListUI(string[] locations)
+    {
+
+        List<string> leftColumn = new List<string>();
+        List<string> rightColumn = new List<string>();
+
+        for (int i = 0; i < locations.Length; i++)
+        {
+            if (i % 2 == 0)
+                leftColumn.Add(locations[i]);
+            else
+                rightColumn.Add(locations[i]);
+        }
+
+        if (locationListLeftText != null)
+            locationListLeftText.text = string.Join("\n", leftColumn);
+
+        if (locationListRightText != null)
+            locationListRightText.text = string.Join("\n", rightColumn);
+    }
 
     public void ShowDecisionFeedback(bool wasCorrect, string truth, int reputation, System.Action onContinue)
     {
