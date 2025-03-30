@@ -870,8 +870,8 @@ MonoBehaviour:
   periodDelay: 0.4
   boyPitchMin: 0.95
   boyPitchMax: 1.05
-  girlPitchMin: 1.1
-  girlPitchMax: 1.2
+  girlPitchMin: 1.5
+  girlPitchMax: 1.6
   feedbackSound: {fileID: 1929041805}
   successSound: {fileID: 8300000, guid: 6f9c82beb432f432c8601883ebbaca48, type: 3}
   failureSound: {fileID: 8300000, guid: bd7b5f2983c5247fe920a227631877cc, type: 3}
