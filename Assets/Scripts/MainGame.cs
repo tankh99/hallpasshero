@@ -69,14 +69,14 @@ public class MainGame : MonoBehaviour
 
         // Generate random student and pass data
         currentStudent = studentManager.ShowRandomStudent();
-        
         remainingStudents--;
         
         // Update UI through UIManager
         if (uiManager != null)
         {
-            string timeString = FormatTimeString();
-            uiManager.UpdateGameUI(dayNumber, remainingStudents, reputation, timeString);
+            // string timeString = FormatTimeString();
+            string dateTime = currentStudent.date + " " + currentStudent.time;
+            uiManager.UpdateGameUI(dayNumber, remainingStudents, reputation, dateTime);
         }
     }
 
@@ -164,13 +164,13 @@ public class MainGame : MonoBehaviour
 
     public void ApproveStudent()
     {
-        bool correctDecision = !currentStudent.isLying;
+        bool correctDecision = currentStudent.isValid;
         ProcessDecision(correctDecision);
     }
 
     public void DenyStudent()
     {
-        bool correctDecision = currentStudent.isLying;
+        bool correctDecision = !currentStudent.isValid;
         ProcessDecision(correctDecision);
     }
 

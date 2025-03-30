@@ -18,7 +18,7 @@ public class UIManager : MonoBehaviour
     
     [Header("Game UI")]
     public TextMeshProUGUI dayText;
-    public TextMeshProUGUI timeText;
+    public TextMeshProUGUI dateTimeText;
     public TextMeshProUGUI reputationText;
     public TextMeshProUGUI studentsRemainingText;
     
@@ -81,7 +81,7 @@ public class UIManager : MonoBehaviour
     public float boyPitchMax = 1.05f;
     public float girlPitchMin = 1.1f;
     public float girlPitchMax = 1.2f;
-
+    
     private MainGame gameManager;
     
     private Coroutine textStreamCoroutine;
@@ -93,7 +93,7 @@ public class UIManager : MonoBehaviour
     public AudioClip successSound;
     public AudioClip failureSound;
     public AudioSource dayEndSound;
-
+    
     private void Awake()
     {
         gameManager = FindFirstObjectByType<MainGame>();
@@ -107,7 +107,7 @@ public class UIManager : MonoBehaviour
         
         if (inspectPassButton != null)
             inspectPassButton.onClick.AddListener(InspectPass);
-
+        
         if (teacherListButton != null)
             teacherListButton.onClick.AddListener(ShowTeacherList);
 
@@ -230,12 +230,12 @@ public class UIManager : MonoBehaviour
             gameManager.InitializeDay();
     }
     
-    public void UpdateGameUI(int day, int studentsRemaining, int reputation, string time)
+    public void UpdateGameUI(int day, int studentsRemaining, int reputation, string dateTime)
     {
         dayText.text = "Day " + day;
         studentsRemainingText.text = "Students: " + studentsRemaining;
         reputationText.text = "Reputation: " + reputation;
-        timeText.text = time;
+        dateTimeText.text = dateTime;
     }
 
     private IEnumerator StreamText(string fullText, TextMeshProUGUI textComponent)
@@ -361,7 +361,7 @@ public class UIManager : MonoBehaviour
         if (passLeaveAtText != null) passLeaveAtText.text = currentPass.leaveAt;
         if (passReturnAtText != null) passReturnAtText.text = currentPass.returnAt;
         if (passVisitingText != null) passVisitingText.text = currentPass.visiting;
-        if (passTeacherNameText != null) passTeacherNameText.text = currentPass.teacherName;
+        if (passTeacherNameText != null) passTeacherNameText.text = currentPass.signedBy;
     }
     public void UpdateTeacherListUI(string[] teachers)
     {
@@ -402,6 +402,12 @@ public class UIManager : MonoBehaviour
 
         if (locationListRightText != null)
             locationListRightText.text = string.Join("\n", rightColumn);
+    }
+
+    public void UpdateOverlayUI(string dateTime)
+    {
+        if (dateTimeText != null)
+            dateTimeText.text = dateTime;
     }
 
     public void ShowDecisionFeedback(bool wasCorrect, string truth, int reputation, System.Action onContinue)

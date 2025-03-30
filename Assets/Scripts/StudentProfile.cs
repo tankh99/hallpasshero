@@ -6,7 +6,9 @@ public class StudentProfile
     public string reason;
     public HallPassData hallPass;
     public Sprite displayImage;
-    public bool isLying;
+    public bool isValid;
     public string truth;
     public bool isGirl;
+    public string date;
+    public string time;
 }
