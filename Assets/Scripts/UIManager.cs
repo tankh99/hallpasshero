@@ -70,6 +70,7 @@ public class UIManager : MonoBehaviour
     public GameObject feedbackPanel;
     public TextMeshProUGUI feedbackText;
     public Button continueButton;
+    public Button backToMainMenuButton;
     public Image feedbackIcon;  // Optional: for showing success/failure icon
     public float feedbackDisplayTime = 2f;  // How long to show the feedback
     
@@ -133,6 +134,9 @@ public class UIManager : MonoBehaviour
         
         if (nextDayButton != null)
             nextDayButton.onClick.AddListener(NextDay);
+
+        if (backToMainMenuButton != null)
+            backToMainMenuButton.onClick.AddListener(BackToMainMenu);
     }
     
     private void Start()
@@ -177,6 +181,10 @@ public class UIManager : MonoBehaviour
         #else
         Application.Quit();
         #endif
+    }
+
+    public void BackToMainMenu() {
+        SceneManager.LoadScene("LandingScene");
     }
     
     public void InspectPass()
