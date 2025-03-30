@@ -13,12 +13,12 @@ public class StudentManager : MonoBehaviour
     private UIManager uiManager;
 
 
-    void Start()
+    void Awake()
     {
         uiManager = FindFirstObjectByType<UIManager>();
-
         LoadStudents();
-        ShowRandomStudent();
+
+        // ShowRandomStudent();
     }
 
     void Update()
@@ -63,7 +63,7 @@ public class StudentManager : MonoBehaviour
                 truth = "Linda is secretly attempting to turn herself into a werewolf using some dubious chemistry experiments. So far, she’s only managed to get extremely hairy elbows."
             },
             new StudentProfile {
-                name = "Ninda",
+                name = "Nina",
                 reason = "I was told by the janitor that the school's archives are haunted by the ghost of a former headmaster who, before dying, promised to protect the school from a hidden cult that’s been inside the walls for over a century. I have to collect the necessary artifacts to make peace with him.",
                 hallPass = new HallPassData {
                     teacherName = "Ms. Smith",
@@ -71,9 +71,9 @@ public class StudentManager : MonoBehaviour
                     returnAt = "11:00 AM",
                     visiting = "Bathroom",
                     date = "2025-03-30",
-                    studentName = "Maya"
+                    studentName = "Nina"
                 },
-                displayImage = Resources.Load<Sprite>("Sprites/boy2"),
+                displayImage = Resources.Load<Sprite>("Sprites/girl2"),
                 isLying = true,
                 truth = "Nina is digging through old papers about the school’s history, but she's convinced that there are hidden messages in the margins that can only be deciphered by summoning the 'spirit of the headmaster.'",
             }

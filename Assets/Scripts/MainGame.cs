@@ -32,7 +32,9 @@ public class MainGame : MonoBehaviour
         studentManager = FindFirstObjectByType<StudentManager>();
     }
 
-
+    private void Start() {
+        InitializeDay();
+    }
     public void SpawnNextStudent()
     {
         if (remainingStudents <= 0)
@@ -119,13 +121,13 @@ public class MainGame : MonoBehaviour
 
     public void ApproveStudent()
     {
-        bool correctDecision = currentStudent.isLying;
+        bool correctDecision = !currentStudent.isLying;
         ProcessDecision(correctDecision);
     }
 
     public void DenyStudent()
     {
-        bool correctDecision = !currentStudent.isLying;
+        bool correctDecision = currentStudent.isLying;
         ProcessDecision(correctDecision);
     }
 
@@ -148,20 +150,23 @@ public class MainGame : MonoBehaviour
         // Clamp reputation
         reputation = Mathf.Clamp(reputation, 0, 100);
         
-        // In a full implementation, show feedback before continuing
-        StartCoroutine(WaitAndContinue());
+        // Disable buttons immediately
+        if (uiManager != null)
+        {
+            uiManager.SetDecisionButtonsInteractable(false);
+            // Show feedback and wait for user confirmation
+            uiManager.ShowDecisionFeedback(correctDecision, currentStudent.truth, reputation, () => {
+                StartCoroutine(WaitAndContinue());
+            });
+        }
     }
 
     private IEnumerator WaitAndContinue()
     {
+        // Small delay for visual feedback
+        yield return new WaitForSeconds(0.5f);
         
-        // Disable buttons during wait
-        if (uiManager != null)
-            uiManager.SetDecisionButtonsInteractable(false);
-        
-        yield return new WaitForSeconds(1.0f);
-        
-        // Re-enable buttons
+        // Re-enable buttons and spawn next student
         if (uiManager != null)
             uiManager.SetDecisionButtonsInteractable(true);
         

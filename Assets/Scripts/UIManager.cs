@@ -51,6 +51,13 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI finalReputationText;
     public Button nextDayButton;
     
+    [Header("Decision Feedback")]
+    public GameObject feedbackPanel;
+    public TextMeshProUGUI feedbackText;
+    public Button continueButton;
+    public Image feedbackIcon;  // Optional: for showing success/failure icon
+    public float feedbackDisplayTime = 2f;  // How long to show the feedback
+    
     private MainGame gameManager;
     
     private void Awake()
@@ -87,8 +94,6 @@ public class UIManager : MonoBehaviour
         if (hallPassView != null) hallPassView.SetActive(false);
         
         ShowMainMenu();
-        LoadStudents();
-        ShowRandomStudent();
     }
     
     public void ShowMainMenu()
@@ -185,75 +190,6 @@ public class UIManager : MonoBehaviour
             studentPortrait.sprite = displayImage;
     }
     private StudentProfile[] students;
-
-    void LoadStudents()
-    {
-        students = new StudentProfile[]
-        {
-            new StudentProfile {
-                name = "Charlie",
-                reason = "I've been given access to the school's secret underground bunker. I have to go in for a routine check. No big deal. Just government stuff. You wouldn't understand.",
-                hallPass = new HallPassData {
-                    excuse = "Meeting with the student council about a school event",
-                    teacherName = "Ms. Smith",
-                    leaveAt = "10:00 AM",
-                    returnAt = "11:00 AM",
-                    visiting = "Nurse",
-                    date = "2025-03-30",
-                    studentName = "Charlie"
-                },
-                displayImage = Resources.Load<Sprite>("Sprites/boy1"),
-                isLying = true,
-                truth = "Charlie is meeting with a group of students to discuss how to secretly remove a popular vending machine from the school without anyone noticing."
-            },
-            new StudentProfile {
-                name = "Linda",
-                reason = "I'm heading to the science lab to finish up an experiment. What is it about? Oh, it's just a small project on controlling the weather. I can't explain any more.",
-                hallPass = new HallPassData {
-                    excuse = "Working on a science project for class",
-                    teacherName = "Ms. Smith",
-                    leaveAt = "10:00 AM",
-                    returnAt = "11:00 AM",
-                    visiting = "Locker",
-                    date = "2025-03-30",
-                    studentName = "Linda"
-                },
-                displayImage = Resources.Load<Sprite>("Sprites/girl1"),
-                isLying = true,
-                truth = "Linda is secretly attempting to turn herself into a werewolf using some dubious chemistry experiments. So far, she's only managed to get extremely hairy elbows."
-            },
-            new StudentProfile {
-                name = "Nina",
-                reason = "I was told by the janitor that the school's archives are haunted by the ghost of a former headmaster who, before dying, promised to protect the school from a hidden cult that's been inside the walls for over a century. I have to collect the necessary artifacts to make peace with him.",
-                hallPass = new HallPassData {
-                    teacherName = "Ms. Smith",
-                    leaveAt = "10:00 AM",
-                    returnAt = "11:00 AM",
-                    visiting = "Bathroom",
-                    date = "2025-03-30",
-                    studentName = "Nina"
-                },
-                displayImage = Resources.Load<Sprite>("Sprites/girl2"),
-                isLying = true,
-                truth = "Nina is digging through old papers about the school's history, but she's convinced that there are hidden messages in the margins that can only be deciphered by summoning the 'spirit of the headmaster.'",
-            }
-        };
-    }
-
-    public void ShowRandomStudent() {
-        if(students.Length == 0) {
-            Debug.LogError("No students found");
-            return;
-        }
-
-        int randomIndex = Random.Range(0, students.Length);
-        
-        StudentProfile randomStudent = students[randomIndex];
-        studentNameText.text = randomStudent.name;
-        reasonText.text = randomStudent.reason;
-        studentPortrait.sprite = randomStudent.displayImage;
-    }
-
     public void SetDecisionButtonsInteractable(bool interactable)
     {
         if (approveButton != null) approveButton.interactable = interactable;
@@ -287,6 +223,39 @@ public class UIManager : MonoBehaviour
         if (passTimeText != null) passTimeText.text = "Leave At: " + currentPass.leaveAt + " Return At: " + currentPass.returnAt;
         if (passDestinationText != null) passDestinationText.text = "Visiting: " + currentPass.visiting;
         if (passTeacherText != null) passTeacherText.text = "Teacher: " + currentPass.teacherName;
+    }
+
+    public void ShowDecisionFeedback(bool wasCorrect, string truth, int reputation, System.Action onContinue)
+    {
+        if (feedbackPanel != null)
+        {
+            feedbackPanel.SetActive(true);
+            
+            string resultText = wasCorrect ? "Correct Decision!" : "Incorrect Decision!";
+            string fullText = $"{resultText}\n\nTruth: {truth}";
+            
+            if (feedbackText != null)
+                feedbackText.text = fullText;
+                
+            // Set up continue button
+            if (continueButton != null)
+            {
+                continueButton.onClick.RemoveAllListeners();  // Clear previous listeners
+                continueButton.onClick.AddListener(() => {
+                    feedbackPanel.SetActive(false);  // Hide the panel
+                    onContinue?.Invoke();  // Call the continuation callback
+                });
+            }
+
+            reputationText.text = "Reputation: " + reputation;
+        }
+    }
+
+    private IEnumerator HideFeedbackAfterDelay()
+    {
+        yield return new WaitForSeconds(feedbackDisplayTime);
+        if (feedbackPanel != null)
+            feedbackPanel.SetActive(false);
     }
 
 } 
