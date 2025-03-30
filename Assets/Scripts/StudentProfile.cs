@@ -6,5 +6,7 @@ public class StudentProfile
     public string reason;
     public HallPassData hallPass;
     public Sprite displayImage;
+    public bool isLying;
+    public string truth;
 
 }

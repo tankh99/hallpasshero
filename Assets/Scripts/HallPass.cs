@@ -7,5 +7,6 @@ public class HallPassData : MonoBehaviour {
     public string visiting;
     public string date;
     public string studentName;
+    public string excuse;
 
 }

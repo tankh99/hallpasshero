@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 public class MainGame : MonoBehaviour
@@ -20,34 +19,178 @@ public class MainGame : MonoBehaviour
     public int studentsPerDay = 5;
     public float timeBetweenStudents = 3f;
     private int remainingStudents;
-    [Header("UI References")]
-    public GameObject studentView;
-    public GameObject hallPassView;
-    public TextMeshProUGUI dayText;
-    public TextMeshProUGUI timeText;
-    public TextMeshProUGUI reputationText;
-    public TextMeshProUGUI studentsRemainingText;
-    public Button approveButton;
-    public Button denyButton;
-    public Button inspectPassButton;
     
     private bool isPassVisible = false;
     private bool isDayComplete = false;
     private float gameTime = 480f; // 8:00 AM in minutes
     
     private UIManager uiManager;
-
-
+    private StudentManager studentManager;
+    private StudentProfile currentStudent;
     private void Awake() {
-        uiManager = FindObjectOfType<UIManager>();
-        
+        uiManager = FindFirstObjectByType<UIManager>();
+        studentManager = FindFirstObjectByType<StudentManager>();
     }
 
-    public void StartGame()
+
+    public void SpawnNextStudent()
     {
-        SceneManager.LoadScene("MainGame");
+        if (remainingStudents <= 0)
+        {
+            EndDay();
+            return;
+        }
+
+        // Hide hall pass and show student
+        if (uiManager != null)
+            uiManager.ToggleViews(true);
+        isPassVisible = false;
+
+        // Generate random student and pass data
+        currentStudent = studentManager.ShowRandomStudent();
+        
+        remainingStudents--;
+        
+        // Update UI through UIManager
+        if (uiManager != null)
+        {
+            string timeString = FormatTimeString();
+            uiManager.UpdateGameUI(dayNumber, remainingStudents, reputation, timeString);
+        }
+    }
+
+    public void InitializeDay()
+    {
+        // Reset day variables
+        studentsChecked = 0;
+        correctDecisions = 0;
+        incorrectDecisions = 0;
+        remainingStudents = studentsPerDay;
+        gameTime = 480f; // 8:00 AM
+        isDayComplete = false;
+        
+        // Update UI through UIManager
+        if (uiManager != null)
+        {
+            string timeString = FormatTimeString();
+            uiManager.UpdateGameUI(dayNumber, remainingStudents, reputation, timeString);
+        }
+        
+        // Show student view, hide hall pass view
+        if (uiManager != null)
+        {
+            uiManager.ToggleViews(true);
+            uiManager.SetHallPassViewActive(false);
+        }
+        isPassVisible = false;
+        
+        // Spawn first student
+        SpawnNextStudent();
+    }
+
+    private void UpdateGameTime()
+    {
+        gameTime += Time.deltaTime;
+        
+        // Update UI through UIManager
+        if (uiManager != null)
+        {
+            string timeString = FormatTimeString();
+            uiManager.UpdateGameUI(dayNumber, remainingStudents, reputation, timeString);
+        }
+    }
+    
+
+    public void ToggleHallPass()
+    {
+        isPassVisible = !isPassVisible;
+        
+        if (uiManager != null)
+        {
+            uiManager.ToggleViews(!isPassVisible);
+            if (isPassVisible)
+            {
+                uiManager.UpdateHallPassUI(currentStudent.hallPass);
+
+            }
+        }
+
+    }
+
+    public void ApproveStudent()
+    {
+        bool correctDecision = currentStudent.isLying;
+        ProcessDecision(correctDecision);
+    }
+
+    public void DenyStudent()
+    {
+        bool correctDecision = !currentStudent.isLying;
+        ProcessDecision(correctDecision);
+    }
+
+    private void ProcessDecision(bool correctDecision)
+    {
+        studentsChecked++;
+        
+        if (correctDecision)
+        {
+            correctDecisions++;
+            reputation += 5;
+        }
+        else
+        {
+            incorrectDecisions++;
+            reputation -= 10;
+            demeritsIssued++;
+        }
+        
+        // Clamp reputation
+        reputation = Mathf.Clamp(reputation, 0, 100);
+        
+        // In a full implementation, show feedback before continuing
+        StartCoroutine(WaitAndContinue());
+    }
+
+    private IEnumerator WaitAndContinue()
+    {
+        
+        // Disable buttons during wait
+        if (uiManager != null)
+            uiManager.SetDecisionButtonsInteractable(false);
+        
+        yield return new WaitForSeconds(1.0f);
+        
+        // Re-enable buttons
+        if (uiManager != null)
+            uiManager.SetDecisionButtonsInteractable(true);
+        
+        SpawnNextStudent();
+    }
+
+    private void EndDay()
+    {
+        isDayComplete = true;
+        
+        // Hide game UI
+        if (uiManager != null)
+        {
+            uiManager.ToggleViews(false);  // Hide both views
+            uiManager.ShowDayEndPanel(dayNumber, studentsChecked, correctDecisions, incorrectDecisions, reputation);
+        }
+        
+        // Increment day number
+        dayNumber++;
     }
 
 
-
+    private string FormatTimeString()
+    {
+        int hours = Mathf.FloorToInt(gameTime / 60f);
+        int minutes = Mathf.FloorToInt(gameTime % 60f);
+        string ampm = hours >= 12 ? "PM" : "AM";
+        hours = hours > 12 ? hours - 12 : hours;
+        hours = hours == 0 ? 12 : hours;
+        return string.Format("{0}:{1:00} {2}", hours, minutes, ampm);
+    }
 }

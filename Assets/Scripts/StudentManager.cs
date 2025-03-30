@@ -10,9 +10,13 @@ public class StudentManager : MonoBehaviour
     public Image displayImage;
 
     private StudentProfile[] students;
+    private UIManager uiManager;
+
 
     void Start()
     {
+        uiManager = FindFirstObjectByType<UIManager>();
+
         LoadStudents();
         ShowRandomStudent();
     }
@@ -28,8 +32,9 @@ public class StudentManager : MonoBehaviour
         {
             new StudentProfile {
                 name = "Charlie",
-                reason = "I’m off to meet with the school board about a new student surveillance initiative. You don’t understand, but I have the inside scoop.",
+                reason = "I’ve been given access to the school's secret underground bunker. I have to go in for a routine check. No big deal. Just government stuff. You wouldn’t understand.",
                 hallPass = new HallPassData {
+                    excuse = "Meeting with the student council about a school event",
                     teacherName = "Ms. Smith",
                     leaveAt = "10:00 AM",
                     returnAt = "11:00 AM",
@@ -37,24 +42,29 @@ public class StudentManager : MonoBehaviour
                     date = "2025-03-30",
                     studentName = "Charlie"
                 },
-                displayImage = Resources.Load<Sprite>("Sprites/boy1")
+                displayImage = Resources.Load<Sprite>("Sprites/boy1"),
+                isLying = true,
+                truth = "Charlie is meeting with a group of students to discuss how to secretly remove a popular vending machine from the school without anyone noticing."
             },
             new StudentProfile {
-                name = "Leo Fernandez",
-                reason = "I’m off to meet with the school board about a new student surveillance initiative. You don’t understand, but I have the inside scoop.",
+                name = "Linda",
+                reason = "I’m heading to the science lab to finish up an experiment. What is it about? Oh, it’s just a small project on controlling the weather. I can’t explain any more.",
                 hallPass = new HallPassData {
+                    excuse = "Working on a science project for class",
                     teacherName = "Ms. Smith",
                     leaveAt = "10:00 AM",
                     returnAt = "11:00 AM",
                     visiting = "Locker",
                     date = "2025-03-30",
-                    studentName = "Leo"
+                    studentName = "Linda"
                 },
-                displayImage = Resources.Load<Sprite>("Sprites/boy2")
+                displayImage = Resources.Load<Sprite>("Sprites/girl1"),
+                isLying = true,
+                truth = "Linda is secretly attempting to turn herself into a werewolf using some dubious chemistry experiments. So far, she’s only managed to get extremely hairy elbows."
             },
             new StudentProfile {
-                name = "Maya Patel",
-                reason = "I’m off to meet with the school board about a new student surveillance initiative. You don’t understand, but I have the inside scoop.",
+                name = "Ninda",
+                reason = "I was told by the janitor that the school's archives are haunted by the ghost of a former headmaster who, before dying, promised to protect the school from a hidden cult that’s been inside the walls for over a century. I have to collect the necessary artifacts to make peace with him.",
                 hallPass = new HallPassData {
                     teacherName = "Ms. Smith",
                     leaveAt = "10:00 AM",
@@ -63,23 +73,26 @@ public class StudentManager : MonoBehaviour
                     date = "2025-03-30",
                     studentName = "Maya"
                 },
-                displayImage = Resources.Load<Sprite>("Sprites/girl1")
+                displayImage = Resources.Load<Sprite>("Sprites/boy2"),
+                isLying = true,
+                truth = "Nina is digging through old papers about the school’s history, but she's convinced that there are hidden messages in the margins that can only be deciphered by summoning the 'spirit of the headmaster.'",
             }
         };
     }
 
-    public void ShowRandomStudent() {
+    public StudentProfile ShowRandomStudent() {
         if(students.Length == 0) {
             Debug.LogError("No students found");
-            return;
+            return null;
         }
 
         int randomIndex = Random.Range(0, students.Length);
-        
         StudentProfile randomStudent = students[randomIndex];
-        nameText.text = randomStudent.name;
-        reasonText.text = randomStudent.reason;
-        hallPassText.text = randomStudent.hallPass.teacherName + " " + randomStudent.hallPass.leaveAt + " - " + randomStudent.hallPass.returnAt + " " + randomStudent.hallPass.visiting;
-        displayImage.sprite = randomStudent.displayImage;
+        
+        if (uiManager != null) {
+            uiManager.UpdateStudentUI(randomStudent.name, randomStudent.reason, randomStudent.displayImage);
+        }
+        return randomStudent;
     }
+
 }
