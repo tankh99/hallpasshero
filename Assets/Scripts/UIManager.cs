@@ -58,8 +58,23 @@ public class UIManager : MonoBehaviour
     public Image feedbackIcon;  // Optional: for showing success/failure icon
     public float feedbackDisplayTime = 2f;  // How long to show the feedback
     
+    [Header("Text Streaming")]
+    public AudioSource textSound;
+    public float characterDelay = 0.05f;
+    public float commaDelay = 0.2f;
+    public float periodDelay = 0.4f;
+    // Separate pitch ranges for different voices
+    public float boyPitchMin = 0.95f;
+    public float boyPitchMax = 1.05f;
+    public float girlPitchMin = 1.1f;
+    public float girlPitchMax = 1.2f;
+
     private MainGame gameManager;
     
+    private Coroutine textStreamCoroutine;
+    private string currentFullText;  // Store the full text
+    private StudentProfile currentSpeaker;  // Add this field
+
     private void Awake()
     {
         gameManager = FindFirstObjectByType<MainGame>();
@@ -177,13 +192,61 @@ public class UIManager : MonoBehaviour
         timeText.text = time;
     }
 
-    public void UpdateStudentUI(string studentName, string reason, Sprite displayImage)
+    private IEnumerator StreamText(string fullText, TextMeshProUGUI textComponent)
     {
+        currentFullText = fullText;
+        textComponent.text = "";
+        
+        for (int i = 0; i < fullText.Length; i++)
+        {
+            char c = fullText[i];
+            
+            if (textSound != null && c != ' ')
+            {
+                // Set pitch based on speaker
+                if (currentSpeaker != null && currentSpeaker.isGirl)
+                {
+                    textSound.pitch = Random.Range(girlPitchMin, girlPitchMax);
+                }
+                else
+                {
+                    textSound.pitch = Random.Range(boyPitchMin, boyPitchMax);
+                }
+                textSound.Play();
+            }
+            
+            textComponent.text += c;
+
+            float pauseDuration = characterDelay;
+            if (c == '.' || c == '!' || c == '?')
+            {
+                pauseDuration = periodDelay;
+            }
+            else if (c == ',')
+            {
+                pauseDuration = commaDelay;
+            }
+
+            yield return new WaitForSeconds(pauseDuration);
+        }
+        
+        textStreamCoroutine = null;
+    }
+
+    // Method to update student UI with streaming text
+    public void UpdateStudentUI(string studentName, string reason, Sprite displayImage, StudentProfile student)
+    {
+        currentSpeaker = student;  // Store the current speaker
         if (studentNameText != null)
             studentNameText.text = studentName;
         
+        // Stop any existing text streaming
+        if (textStreamCoroutine != null)
+            StopCoroutine(textStreamCoroutine);
+        
+        // Start new text streaming for reason
         if (reasonText != null)
-            reasonText.text = reason;
+            textStreamCoroutine = StartCoroutine(StreamText(reason, reasonText));
         
         if (studentPortrait != null)
             studentPortrait.sprite = displayImage;

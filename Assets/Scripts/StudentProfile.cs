@@ -8,5 +8,5 @@ public class StudentProfile
     public Sprite displayImage;
     public bool isLying;
     public string truth;
-
+    public bool isGirl;
 }
