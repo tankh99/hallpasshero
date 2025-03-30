@@ -96,7 +96,6 @@ public class UIManager : MonoBehaviour
     public AudioClip failureSound;
     public AudioSource dayEndSound;
     
-    
     private void Awake()
     {
         gameManager = FindFirstObjectByType<MainGame>();
@@ -182,9 +181,12 @@ public class UIManager : MonoBehaviour
     
     public void InspectPass()
     {
-        if (gameManager != null) 
+        if (gameManager != null)
         {
-            soundEffectSource.Play();
+            if (soundEffectSource != null)
+            {
+                soundEffectSource.Play();
+            }
             gameManager.ToggleHallPass();
         }
     }
@@ -193,16 +195,21 @@ public class UIManager : MonoBehaviour
     {
         if (gameManager != null)
         {
-            soundEffectSource.Play();
+            if (soundEffectSource != null)
+            {
+                soundEffectSource.Play();
+            }
             gameManager.ToggleTeacherList();
         }
     }
 
     public void ShowLocationList()
     {
-        if (gameManager != null)
-        {
-            soundEffectSource.Play();
+        if (gameManager != null) {
+            if (soundEffectSource != null)
+            {
+                soundEffectSource.Play();
+            }
             gameManager.ToggleLocationList();
         }
     }
@@ -210,7 +217,10 @@ public class UIManager : MonoBehaviour
     public void ReturnToStudent()
     {
         if (gameManager != null) {
-            soundEffectSource.Play();
+            if (soundEffectSource != null)
+            {
+                soundEffectSource.Play();
+            }
             gameManager.ToggleHallPass();
         }
     }
