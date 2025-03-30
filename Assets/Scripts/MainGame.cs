@@ -190,8 +190,15 @@ public class MainGame : MonoBehaviour
             demeritsIssued++;
         }
         
+        
         // Clamp reputation
         reputation = Mathf.Clamp(reputation, 0, 100);
+
+        // Debug.Log("Reputation: " + reputation);
+
+        if(reputation <= 0) {
+            uiManager.GameOver();
+        }
         
         // Disable buttons immediately
         if (uiManager != null)
