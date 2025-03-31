@@ -67,11 +67,56 @@ public class StudentManager : MonoBehaviour
                 truth = "Jenny's hall pass didn't mention that she was going to the restroom.",
                 displayImage = Resources.Load<Sprite>("Sprites/girl1"),
                 date = "2025-03-30",
-                time = "10:08 AM",
+                time = "9:08 AM",
                  minPitch = 1.55f,  // Medium female pitch
                 maxPitch = 1.65f,
                 volume = 0.6f
             },
+            new StudentProfile {
+                name = "Liam",
+                reason = "AHHHH, I'M LITERALLY DYING AND YOU'RE STOPPING ME FROM GOING TO THE NURSE??!?!",
+                hallPass = new HallPassData {
+                    signedBy = "Dr. Simmons",
+                    leaveAt = "12:30 PM",
+                    returnAt = "1:00 PM",
+                    visiting = "Nurse",
+                    date = "2025-03-30",
+                    studentName = "Liam"
+                },
+                isValid = false,
+                truth = "Liam accidentally stabbed his thumb with a staple and decided it was a great chance to forge a hall pass and skip class. Unfortunately, he forgot that Mr Simmons is not a doctor.",
+                displayImage = Resources.Load<Sprite>("Sprites/boy1"),
+                date = "2025-03-30",
+                time = "12:35 PM",
+                minPitch = 0.7f,   // Slightly higher male pitch due to panic
+                maxPitch = 1.3f,
+                volume = 1.0f  
+            },
+            // Wrong signedBy (should be Mr. Simmons)
+            new StudentProfile {
+                name = "Sophia",
+                reason = "Here, take this...*slides a bag of weed to you*. I need to get to the bookstore for an errand. Pronto.",
+                hallPass = new HallPassData {
+                    signedBy = "Ms. Harper",
+                    leaveAt = "2:10 PM",
+                    returnAt = "2:30 PM",
+                    visiting = "Bookstore",
+                    date = "2025-03-30",
+                    studentName = "Sophia"
+                },
+                isValid = true,
+                isGirl = true,
+                truth = "Sophia's turning over a new leaf. She's been saving up to buy 'Beyond Addiction: A Guide to Recovery'. If only she stopped giving away bags of weed like a charity.",
+                displayImage = Resources.Load<Sprite>("Sprites/girl1"),
+                date = "2025-03-30",
+                time = "2:12 PM",
+                minPitch = 1.5f,   // Lower female pitch, trying to be discrete
+                maxPitch = 1.6f,
+                volume = 0.35f 
+            },
+            
+            // DAY 2
+
             new StudentProfile {
                 name = "Loro",
                 reason = "I need to get an early lunch from the cafeteria.",
@@ -80,41 +125,19 @@ public class StudentManager : MonoBehaviour
                     leaveAt = "9:35 AM",
                     returnAt = "10:35 AM",
                     visiting = "Cafeteria",
-                    date = "2025-03-30",
+                    date = "2025-03-31",
                     studentName = "Loro"
                 },
                 isValid = true,
                 isGirl = true,
                 truth = "Loro ate her lunch and found Jenny's phone. She gave it back to Jenny for a random of $25",
                 displayImage = Resources.Load<Sprite>("Sprites/girl2"),
-                date = "2025-03-30",
+                date = "2025-03-31",
                 time = "9:40 AM",
                 minPitch = 1.75f,  // Higher pitch, confident tone
                 maxPitch = 1.85f,
                 volume = 0.5f 
             },
-            // Wrong signedBy, wrong hall pass date
-            new StudentProfile {
-                name = "Tyler",
-                reason = "I got permission from Mr. Simmons to go to the library to research on quantum physics for my project.",
-                hallPass = new HallPassData {
-                    signedBy = "Mr. Simmons",
-                    leaveAt = "11:00 AM",
-                    returnAt = "11:45 AM",
-                    visiting = "Library",
-                    date = "2025-02-30",
-                    studentName = "Tyler"
-                },
-                isValid = false,
-                truth = "Tyler isn’t researching quantum physics. He just wants to skip class",
-                displayImage = Resources.Load<Sprite>("Sprites/boy1"),
-                date = "2025-03-30",
-                time = "11:05 AM",
-                minPitch = 0.95f,  // Standard male pitch
-                maxPitch = 1.0f,
-                volume = 0.6f 
-            },
-            // DAY 2
 
             // Wrong student name, wrong signedBy
             new StudentProfile {
@@ -138,47 +161,26 @@ public class StudentManager : MonoBehaviour
                 maxPitch = 1.7f,
                 volume = 0.8f  
             },
-            // Wrong signedBy (should be Mr. Simmons)
+            // Wrong signedBy, wrong hall pass date
             new StudentProfile {
-                name = "Liam",
-                reason = "AHHHH, I'M LITERALLY DYING AND YOU'RE STOPPING ME FROM GOING TO THE NURSE??!?!",
+                name = "Tyler",
+                reason = "I got permission from Mr. Simmons to go to the library to research on quantum physics for my project.",
                 hallPass = new HallPassData {
-                    signedBy = "Dr. Simmons",
-                    leaveAt = "12:30 PM",
-                    returnAt = "1:00 PM",
-                    visiting = "Nurse",
-                    date = "2025-03-31",
-                    studentName = "Liam"
+                    signedBy = "Mr. Simmons",
+                    leaveAt = "2:00 AM",
+                    returnAt = "2:45 AM",
+                    visiting = "Library",
+                    date = "2025-02-31",
+                    studentName = "Tyler"
                 },
                 isValid = false,
-                truth = "Liam accidentally stabbed his thumb with a staple and decided it was a great chance to forge a hall pass and skip class. Unfortunately, he forgot that Mr Simmons is not a doctor.",
+                truth = "Tyler isn’t researching quantum physics. He just wants to skip class",
                 displayImage = Resources.Load<Sprite>("Sprites/boy1"),
                 date = "2025-03-31",
-                time = "12:35 PM",
-                minPitch = 0.7f,   // Slightly higher male pitch due to panic
-                maxPitch = 1.3f,
-                volume = 1.0f  
-            },
-            new StudentProfile {
-                name = "Sophia",
-                reason = "Here, take this...*slides a bag of weed to you*. I need to get to the bookstore for an errand. Pronto.",
-                hallPass = new HallPassData {
-                    signedBy = "Ms. Harper",
-                    leaveAt = "2:10 PM",
-                    returnAt = "2:30 PM",
-                    visiting = "Bookstore",
-                    date = "2025-03-31",
-                    studentName = "Sophia"
-                },
-                isValid = true,
-                isGirl = true,
-                truth = "Sophia's turning over a new leaf. She's been saving up to buy 'Beyond Addiction: A Guide to Recovery'. If only she stopped giving away bags of weed like a charity.",
-                displayImage = Resources.Load<Sprite>("Sprites/girl1"),
-                date = "2025-03-31",
-                time = "2:12 PM",
-                minPitch = 1.5f,   // Lower female pitch, trying to be discrete
-                maxPitch = 1.6f,
-                volume = 0.35f 
+                time = "2:05 AM",
+                minPitch = 0.95f,  // Standard male pitch
+                maxPitch = 1.0f,
+                volume = 0.6f 
             },
 
             // Day 3

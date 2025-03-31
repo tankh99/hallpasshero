@@ -37,6 +37,7 @@ public class MainGame : MonoBehaviour
             "Ms. Wiles",
             "Ms. Lee",
             "Ms. Harper",
+            "Mr. Simmons"
         },
         new string[] {
             "Mr. Owens",
